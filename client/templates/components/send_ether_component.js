@@ -75,9 +75,12 @@ Template.sendConfirmModalTemplate.events({
   'click #send': function(e) {
     e.preventDefault();
     var fundInfo = Session.get("sendEther.fundInfo");
+    my_eth = Ether.findOne({name:Meteor.user().username});
+
+    web3.personal.unlockAccount(my_eth.account_id, my_eth.pw);
     //非同期関数「web3.eth.sendTransaction」を呼ぶことでノードにトランザクションを送信
     web3.eth.sendTransaction({
-      from: fundInfo.fAddr,
+      from: my_eth.account_id,
       to: fundInfo.tAddr,
       value: fundInfo.amount
     }, function(error, txHash){ //戻り値としてトランザクションハッシュ値が返る

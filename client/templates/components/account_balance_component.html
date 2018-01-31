@@ -1,23 +1,57 @@
 <template name="accountBalanceComponent">
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h4>Account Balance</h4>
-    </div>
-    <table class="table">
-      <thead>
+  {{#if (user) }}
+  <form class="new-account" id="regist-account">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h4>あなたの情報</h4>
+      </div>
+      <table class="table">
+        <thead>
         <tr>
           <th>Name</th>
           <th>Address</th>
           <th>Balance</th>
         </tr>
+        </thead>
+        <tbody>
+        {{#if (is_registed) }}
+        <tr>
+          <td>{{my.name}}</td>
+          <td>{{my.account_id}}</td>
+          <td>{{my.blance}}</td>
+        </tr>
+        {{else}}
+        <tr>
+        <td>{{user.username}}</td>
+        <td> <input type="text" name="password" size='40' placeholder="Type to add new password" /></td>
+        <td><input  type="submit" value="登録"></td>
+        </tr>
+        {{/if}}
+        </tbody>
+      </table>
+    </div>
+  </form>
+  {{/if}}
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h4>ランキング</h4>
+    </div>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Balance</th>
+      </tr>
       </thead>
       <tbody>
-        {{#each accounts}}
-          {{> accountBalanceItem}}
-        {{/each}}
+      {{#each accounts}}
+      {{> accountBalanceItem}}
+      {{/each}}
       </tbody>
     </table>
   </div>
+
 </template>
 
 <template name="accountBalanceItem">

@@ -10,7 +10,11 @@ Template.nodeStatusComponent.helpers({
   //接続先ノードのマイニング状態の取得
   //マイニング中であればtrue、そうでなければfalse
   isMining: function(){
-    return Session.get('isMining');
+    if (Session.get('isMining')) {
+      return '掘ってます';
+    } else {
+      return '送金停止中';
+    }
   },
 
   //接続先ノードのマイニングのハッシュレートを取得
